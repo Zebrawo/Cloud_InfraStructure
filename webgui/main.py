@@ -12,7 +12,7 @@ from config import CONFIG
 authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
 
 dnsmang = DnsZone("cli.test","192.168.37.132")
-app = Flask(__name__, template_folder='.')
+app = Flask(__name__, template_folder='templates')
 app.secret_key = "21341r23232"
 
 
