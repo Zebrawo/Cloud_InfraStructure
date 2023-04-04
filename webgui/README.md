@@ -1,22 +1,48 @@
-Introductie
-Dit is een Flask-applicatie die gebruikt wordt om DNS-records toe te voegen, wijzigen en verwijderen. De applicatie gebruikt Authomatic om gebruikers in te laten loggen via OAuth2.
+# Flask Authomatic DNS Management Application
 
-Gebruik
-Voer het bestand app.py uit om de applicatie te starten. De applicatie draait op poort 5000 en gebruikt SSL om veilige verbindingen mogelijk te maken.
+This is a simple Flask application that allows users to manage DNS records on a local DNS server via a web interface. Users can log in using OAuth2 authentication with their Google account and add, edit, or delete DNS records for the specified domain.
 
-De startpagina is te bereiken via https://<ip-adres>:5000/. Hier kan de gebruiker inloggen met behulp van OAuth2 door op de link van de gewenste provider te klikken.
+## Installation
 
-Als de gebruiker is ingelogd, wordt hij doorgestuurd naar de /login/<provider_name>/-route. Hier kan de gebruiker nieuwe DNS-records toevoegen, bestaande wijzigen en/of verwijderen.
+To run this application, you need to have Python 3.x and Flask installed on your machine. You can install Flask using pip:
+```bash
+pip install flask
+```
+you also need to install Authomatic and pymong libraries
+```bash
+pip install authomatic pymongo
+```
+## Usage
 
-Vereisten
-De applicatie vereist Python 3.8 of hoger en de volgende modules:
+To use the application, simply run the "main.py" file:
+```bash
+python main.py
+```
+Then navigate to https://<IP-Address>.nip.io:5000 in your web browser to access the application. Note that the application is using an "nip.io" in the link. nip.io is just deadsimple a wildcard dns.
 
-Flask
-authomatic
-pymongo
-Configuratie
-De configuratie voor Authomatic staat in het bestand config.py. Hierin moeten de gegevens van de OAuth2-provider(s) worden ingevoerd.
+Once logged in with your Google Account or Amazon, you can add, edit or delete DNS records for the specified domain.
 
-De MongoDB-database wordt gebruikt om wijzigingen in de DNS-records bij te houden. De databasegegevens worden ingevoerd in mongo_functions.py.
+## Dependencies
 
-De DNS-zone wordt geconfigureerd in het bestand dnszone.py. Hierin moeten de gegevens van de zone worden ingevoerd.
+This application relies on the following Python libraries
+
+- Flask
+- Authomatic
+- pymongo
+- dnspython
+
+## Files
+
+- main.py: The main application file containing the Flask routes for login and DNS management.
+- config.py: Configuration file containing the OAuth2 authentication settings for Google
+- mongo_functions.py: File containing MongoDB functions for logging DNS management actions & adding users
+- dnszone.py: File containing classes for handling DNS zone file manipulation
+- templates/: Folder containing HTML templates for the application
+
+## Routes
+
+- /: Home page of the application. Displays the logo and the login options
+- /login/<provider_name>/: OAuth2 login page for the specified provider (in this case, google).
+- /login/<provider_name>/add_a_record/: Route for adding a DNS A record.
+- /login/<provider_name>/edit_a_record/: Route for editing a DNS A record.
+- /login/<provider_name>/delete_a_record/: Route for deleting a DNS A record.
