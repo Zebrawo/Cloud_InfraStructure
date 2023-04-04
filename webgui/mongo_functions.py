@@ -8,6 +8,7 @@ db = client.cli
 mongo_users = db.users
 mongo_records = db.Arecords
 
+# Functie voor het opslaan van de gebruiker in MongoDB
 def add_user(name, email, token):
     user = mongo_users.find_one({'email': email})
     if user:
@@ -24,22 +25,23 @@ def add_user(name, email, token):
         print(f"Customer with ID {result.inserted_id} created.")
         return result.inserted_id
 
-
+#Functie voor het opslaan van wanneer een Record is aangepast
 def time_change_FQDN(fqdn, ipv4,email):
-    # Check if the FQDN already exists in the database
+    # Het controleren van of de FQDN al bestaat in de DB
     record = mongo_records.find_one({"fqdn": fqdn})
     if record:
-        # If the record already exists, check if the IP address has changed
+        # Als de record bestaat. Controlleer of de IP address is aangepast
         if record["ipv4"] != ipv4:
-            # If the IP address has changed, update the record with the new IP address and timestamp
+            # Als de ip address is aangepast. Dan passen we dat aan in MongoDB met de nieuwe IP & Timestamp
             now = datetime.now()
             dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
             result = mongo_records.update_one({"fqdn": fqdn}, {"$set": {"ipv4": ipv4, "timestamp": dt_string, "action": "changed"}})
             print(f"Record with FQDN {fqdn} updated. New IP address: {ipv4}")
         else:
+            # Als het al bestaat met de juiste rechten doe niks
             print(f"Record with FQDN {fqdn} already exists.")
     else:
-        # If the record doesn't exist, add it to the database with the current timestamp
+        # Als de record niet bestaat voeg dan toe aan de MongoDB
         now = datetime.now()
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
         record = {
