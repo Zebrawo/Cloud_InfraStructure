@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+    <a href="/">Home</a>
+    
+    <div class="logo">
+        <div class="logo-text">
+            <h1>DaWae DNS</h1>
+        </div>
+        <div class="logo-image">
+            <img src="https://openstack.blob.core.windows.net/openstack/da_wae.ico" alt="DaWae DNS Logo">
+        </div>
+    </div>
+
+    {% if result.error %}
+        <h2>Damn that error: {{ result.error.message }}</h2>
+    {% endif %}
+
+    {% if session['user_name'] %}
+    <h1>Hi {{ session['user_name'] }}</h1>
+    <h2>Your id is: {{ session['user_id'] }}</h2>
+    <h2>Your email is: {{ session['user_email'] }}</h2>
+    {% endif %}
+    
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flashes">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <h1>Add A Record</h1>
+    <form action="{{ url_for('add_a_record', provider_name='google') }}" method="POST">
+        <label for="fqdn">FQDN:</label>
+        <input type="text" id="fqdn" name="fqdn" required>
+        <label for="fqdn">.cli.test</label><br><br>
+        <label for="ipv4">IPv4:</label>
+        <input type="text" id="ipv4" name="ipv4" required><br><br>
+        <input type="submit" value="Add A Record">
+    </form>
+
+    <h1>Edit A Record</h1>
+    <form action="{{ url_for('edit_a_record', provider_name='google') }}" method="POST">        <label for="fqdn">FQDN:</label>
+        <input type="text" id="fqdn" name="fqdn" required>
+        <label for="fqdn">.cli.test</label><br><br>
+        <label for="ipv4">IPv4:</label>
+        <input type="text" id="ipv4" name="ipv4" required><br><br>
+        <input type="submit" value="Edit A Record">
+    </form>
+
+    <h1>Delete A Record</h1>
+    <form action="{{ url_for('delete_a_record', provider_name='google') }}" method="POST">        <label for="fqdn">FQDN:</label>
+        <input type="text" id="fqdn" name="fqdn" required><br><br>
+        <input type="submit" value="Delete A Record">
+    </form>
+
+{% endblock %}
