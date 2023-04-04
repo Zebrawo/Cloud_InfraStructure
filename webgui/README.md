@@ -2,6 +2,9 @@
 
 This is a simple Flask application that allows users to manage DNS records on a local DNS server via a web interface. Users can log in using OAuth2 authentication with their Google account and add, edit, or delete DNS records for the specified domain.
 
+![Website](https://openstack.blob.core.windows.net/openstack/webgui.png)
+![Website Dashboard](https://openstack.blob.core.windows.net/openstack/webgui2.png)
+
 ## Installation
 
 To run this application, you need to have Python 3.x and Flask installed on your machine. You can install Flask using pip:
