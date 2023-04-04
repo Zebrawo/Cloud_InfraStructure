@@ -1,2 +1,4 @@
-# Cloud_InfraStructure
-HU_CSC_CLI_Project: Project voor het vak Cloud Infrastructure
+# Cloud_InfraStructure Project voor school
+
+## Directories
+- webgui: Folder met behorende python & html files voor het project.
