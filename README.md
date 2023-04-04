@@ -37,3 +37,4 @@ met: http://www.duckdns.org/
 
 ## Directories
 - webgui: Folder met behorende python & html files voor het project.
+- dnsapi: Folder met behorden python code voor het gebruik van REST api's
