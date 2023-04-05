@@ -49,9 +49,13 @@ Als je de token hebt gekregen dan kan je bijvoorbeeld een A Record toevoegen en 
 curl -X PUT -H "Authorization: 27a130c3-7ae7-4322-bff1-1c202052db52" -H "Content-Type: application/json" -d '{"ipv4": "192.168.1.100"}' http://192.168.37.132:5000/dns/test4.cli.test
 ```
 
+```bash
+curl -X PUT -d "ipv4=192.168.37.30" -H "Authorization: 1f2f774c-873b-4308-a73a-617061b8dbd4" http://localhost:5000/dns/kaas30.cli.test
+```
+
 Als je een A Record wilt verwijderen:
 ```bash
-
+curl -v -X DELETE -H "Authorization: 97350307-04c1-44a4-b655-e84884ea6a36" http://192.168.37.132:5000/dns/test.cli.test
 ```
 
 
