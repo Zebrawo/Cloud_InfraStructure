@@ -44,9 +44,16 @@ Daarna vraag je om een token:
 curl -X POST http://<URL:PORT>/token
 ```
 
-Als je de token hebt gekregen dan kan je bijvoorbeeld een A Record toevoegen
+Als je de token hebt gekregen dan kan je bijvoorbeeld een A Record toevoegen en of aanpassen
 ```bash
-curl -X POST
+curl -X PUT -H "Authorization: 27a130c3-7ae7-4322-bff1-1c202052db52" -H "Content-Type: application/json" -d '{"ipv4": "192.168.1.100"}' http://192.168.37.132:5000/dns/test4.cli.test
 ```
+
+Als je een A Record wilt verwijderen:
+```bash
+
+```
+
+
 
 
