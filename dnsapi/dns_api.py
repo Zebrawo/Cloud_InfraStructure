@@ -67,7 +67,7 @@ class TokenAPI(Resource):
         return {'token': token}, 200
 
 # Initialize the DNS zone
-dns_zone = DnsZone("cli.test", "192.168.37.130")
+dns_zone = DnsZone("cli.test", "192.168.37.132")
 
 # Add the DNS API resource to the API
 api.add_resource(DnsAPI, '/dns/<string:fqdn>', resource_class_kwargs={'dns_zone': dns_zone})
@@ -76,4 +76,4 @@ api.add_resource(TokenAPI, '/token')
 
 # Start the application
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
