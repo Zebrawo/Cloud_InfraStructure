@@ -54,10 +54,11 @@ class DnsAPI(Resource):
         if not verify_token(request.headers.get('Authorization')):
             return {'error': 'Invalid token'}, 401
 
-        result = self.dns_zone.clear_address(fqdn)
-        if 'error' in result:
-            return result, result.get('error_text', 500)
-        return result, 200
+        try:
+            result = self.dns_zone.clear_address(fqdn)
+            return result, 200
+        except dns.resolver.NoAnswer:
+            return {'message': f'{fqdn} has no address record.'}, 200
 
 # Class to handle token API requests
 class TokenAPI(Resource):
