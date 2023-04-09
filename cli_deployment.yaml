@@ -2,52 +2,43 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: dns-deployment
+  labels:
+    app: dns
 spec:
+  replicas: 1
   selector:
     matchLabels:
       app: dns
-  replicas: 1
   template:
     metadata:
       labels:
         app: dns
     spec:
       containers:
-        - name: webgui-dns
-          image: clicontainer.azurecr.io/webgui_dns:webgui_dns
-          ports:
-            - containerPort: 5000
-        - name: mongodb
-          image: clicontainer.azurecr.io/mongodb:mongodb
-          ports:
-            - containerPort: 27017
-          hostname: db-ta
-        - name: dns-api
-          image: clicontainer.azurecr.io/dns_api:dns_api
-          ports:
-            - containerPort: 5001
-          hostname: dns-api-ta
-        - name: bindserver
-          image: clicontainer.azurecr.io/bindserver:dnsservice
-          ports:
-            - containerPort: 53
-      imagePullSecrets:
-        - name: acr-auth
+      - name: webgui-dns
+        image: clicontainer.azurecr.io/webgui:latestv11
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGODB_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+      - name: mongodb
+        image: clicontainer.azurecr.io/mongodb:latest
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGODB_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        securityContext:
+          privileged: true
+      - name: dns-api
+        image: clicontainer.azurecr.io/dns_api:latestV13
+        ports:
+        - containerPort: 5001
+        securityContext:
+          privileged: true
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: dns-service
-spec:
-  type: LoadBalancer
-  selector:
-    app: dns
-  ports:
-    - name: webgui
-      protocol: TCP
-      port: 80
-      targetPort: 5000
-    - name: dns-api
-      protocol: TCP
-      port: 5001
-      targetPort: 5001
