@@ -36,7 +36,8 @@ nodig waarmee je ook records kan aanmaken, verwijderen of vervangen. Een beetje 
 met: http://www.duckdns.org/
 
 ## Directories
-- webgui:     Folder met behorende python & html files voor het project.
-- dnsapi:     Folder met behorden python code voor het gebruik van REST api's
-- terraform:  Folder met het bijhorende terraform files voor het uitrollen van Azure Kubernetes (AKS)
-- kubernetes  Folder met het bijhorende yaml files voor het deployen van containers en loadbalancer.
+- webgui:     Folder met bijhorende python & html files voor het project.
+- dnsapi:     Folder met bijhorende python code voor het gebruik van REST api's
+- terraform:  Folder met bijhorende terraform files voor het uitrollen van Azure Kubernetes (AKS)
+- kubernetes  Folder met bijhorende yaml files voor het deployen van containers en loadbalancer.
+- mongodb     Folder met Dockerfile en mongodb config file.
