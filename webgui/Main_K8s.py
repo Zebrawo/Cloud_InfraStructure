@@ -5,19 +5,14 @@ import authomatic
 from dnszone import *
 from mongo_functions import *
 from config import CONFIG
-import os
-
-#bindserver_ip = os.environ.get('BINDSERVER_IP')
 
 # Instantiate Authomatic.
 authomatic = Authomatic(CONFIG, 'your secret string', report_errors=False)
 
-#Kubernetes containers krijgen dynamisch ip altijd.
-
-
-dnsmang = DnsZone("cli.test","10.224.0.113")
+#Vervang DNS_ZONE, Bind server ip en Secret key naar jouw eigen gegevens.
+dnsmang = DnsZone("<DNS_ZONE>","<bind server ip>")
 app = Flask(__name__, template_folder='templates')
-app.secret_key = "21341r23232"
+app.secret_key = "<Secret key>"
 
 
 @app.route('/')
