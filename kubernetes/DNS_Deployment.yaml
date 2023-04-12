@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dns-deployment
+  labels:
+    app: dns
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dns
+  template:
+    metadata:
+      labels:
+        app: dns
+    spec:
+      containers:
+      - name: webgui-dns
+        image: <link naar docker image>
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MONGODB_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+      - name: mongodb
+        image: <link naar docker image>
+        ports:
+        - containerPort: 27017
+        env:
+        - name: MONGODB_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        securityContext:
+          privileged: true
+      - name: dns-api
+        image: <link naar docker image>
+        ports:
+        - containerPort: 5001
+        securityContext:
+          privileged: true
+---
