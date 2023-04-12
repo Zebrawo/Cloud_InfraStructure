@@ -12,7 +12,7 @@ Before you begin, make sure you have:
   client_id       = "<your-service-principal-app-id>"
   client_secret   = "<your-service-principal-password>"
   ```
-- Terraform install on your machine. [Download](https://developer.hashicorp.com/terraform/downloads)
+- Terraform installed on your machine. [Download](https://developer.hashicorp.com/terraform/downloads)
 - An SSH key pair for use with the AKS cluster. You can generate a SSH Key with '**SSH-keygen**' or with [PuTTY RSA & DSA Generator](https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html)
 
 ## Deployment
