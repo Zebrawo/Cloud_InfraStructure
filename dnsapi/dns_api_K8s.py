@@ -3,7 +3,6 @@ from flask import Flask, request
 from flask_restful import Api, Resource, reqparse
 from dnszone import *
 import uuid
-import os
 
 # Initialize the Flask application
 app = Flask(__name__)
@@ -68,11 +67,9 @@ class TokenAPI(Resource):
         tokens[token] = True
         return {'token': token}, 200
 
-#Kubernetes pods krijgen allemaal dynamsich IP
-pod_ip = "10.224.0.113"
 
-# Initialize the DNS zone
-dns_zone = DnsZone("cli.test", pod_ip)
+# Initialize the DNS zone & fill your own IP & DNS ZONE
+dns_zone = DnsZone("<DNS_ZONE>", "<Bind_Server_IP")
 
 # Add the DNS API resource to the API
 api.add_resource(DnsAPI, '/dns/<string:fqdn>', resource_class_kwargs={'dns_zone': dns_zone})
